@@ -2,17 +2,19 @@ from mibuild.generic_platform import *
 from mibuild.xilinx_ise import XilinxISEPlatform, CRG_DS
 
 _io = [
+	# System clock (Differential 200MHz)
 	("clk200", 0,
 		Subsignal("p", Pins("J9"), IOStandard("LVDS_25"), Misc("DIFF_TERM=TRUE")),
 		Subsignal("n", Pins("H9"), IOStandard("LVDS_25"), Misc("DIFF_TERM=TRUE"))
 	),
 
-	# User clock
+	# User clock (66MHz)
 	("clk66", 0, Pins("U23"), IOStandard("LVCMOS25")),
 
-	# CPU Reset
+	# CPU reset switch
 	("cpu_reset", 0, Pins("H10"), IOStandard("SSTL15")),
 
+	# LEDs
 	("user_led", 0, Pins("AC22"), IOStandard("LVCMOS25"), Misc("SLEW=SLOW")),
 	("user_led", 1, Pins("AC24"), IOStandard("LVCMOS25"), Misc("SLEW=SLOW")),
 	("user_led", 2, Pins("AE22"), IOStandard("LVCMOS25"), Misc("SLEW=SLOW")),
@@ -34,7 +36,6 @@ _io = [
 		Subsignal("tx", Pins("AD12")),
 		IOStandard("LVCMOS25")
 	),
-
 	("eth", 0,
 		Subsignal("rst_n", Pins("AH13")),
 		Subsignal("dv", Pins("AM13")),
